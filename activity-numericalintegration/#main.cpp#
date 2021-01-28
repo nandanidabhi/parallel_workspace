@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+#include <chrono>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+float f1(float x, int intensity);
+float f2(float x, int intensity);
+float f3(float x, int intensity);
+float f4(float x, int intensity);
+
+#ifdef __cplusplus
+}
+#endif
+
+  
+int main (int argc, char* argv[]) {
+
+  if (argc < 6) {
+    std::cerr<<"usage: "<<argv[0]<<" <functionid> <a> <b> <n> <intensity>"<<std::endl;
+    return -1;
+  }
+  int functionid = argv[0];
+  float  a = argv[2];
+  float b = argv[3];
+  float n = argv[4];
+  int intensity = argv[1];
+
+  float f;
+  if(functionid == 1){
+    f = f1( , intensity);}
+  else if(functionid == 2){
+    f = f2( , intesity);}
+  else if(functionid == 3){
+    f = f3( , intensity);}
+  else if(functionid == 4){
+    f = f4( , intensity);}
+
+  
+
+  
+  return 0;
+}
