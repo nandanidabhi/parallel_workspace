@@ -26,6 +26,13 @@ int main (int argc, char* argv[]) {
   }
 
   auto start = high_resolution_clock::now();
+
+  // sscanf(argv[1],"%d",&functionid);
+  // sscanf(arvg[2],"%d",&a);
+  // sscanf(argv[3],"%d",&b);
+  // sscanf(argv[4],"%d",&n);
+  // sscanf(argv[5],"%d",&intesity);
+  
   int functionid = atoi(argv[1]);
   float a = strtof(argv[2],NULL);
   float b = strtof(argv[3],NULL);
@@ -37,12 +44,23 @@ int main (int argc, char* argv[]) {
   float sum = 0;
   for(int i = 0; i < n; i++){
     x = a + ((i + 0.5) * t1);
-      if(functionid == 1) f = f1(x,intensity);
-      else if(functionid == 2) f = f2(x,intensity);
-      else if(functionid == 3) f = f3(x,intensity);
-      else if(functionid == 4) f = f4(x,intensity);
-      else return -1;
-      sum += f;
+    // if(functionid == 1) f = f1(x,intensity);
+    //  else if(functionid == 2) f = f2(x,intensity);
+    //   else if(functionid == 3) f = f3(x,intensity);
+    //   else if(functionid == 4) f = f4(x,intensity);
+    //   else return -1;
+
+    switch(functionid){
+      case 1: sum += f1(x,intensity);
+	break;
+	case 2: sum += f2(x,intensity);
+	  break;
+	  case 3: sum += f3(x,intensity);
+	    break;
+	    case 4:sum += f4(x,intensity);
+	      break;
+	      default: return -1;
+    }
   }
   std::cout << sum * t1 << std::endl;
   auto stop = high_resolution_clock::now();
