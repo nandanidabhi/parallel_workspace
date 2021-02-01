@@ -39,7 +39,6 @@ int main (int argc, char* argv[]) {
   float n = strtof(argv[4],NULL);
   int intensity = atoi(argv[5]);
   float x;
-  float f;
   float t1 = (b - a) / n;
   float sum = 0;
   for(int i = 0; i < n; i++){
