@@ -63,13 +63,13 @@ int main (int argc, char* argv[]) {
 	      		default: return -1;
     		}
   }
-//   std::cout << sum * t1 << std::endl;
-  fprintf(stdout,"%f\n", sum * t1);
+   std::cout << sum * t1 << std::endl;
+//  fprintf(stdout,"%f\n", sum * t1);
   auto stop = high_resolution_clock::now();
   auto duration = duration_cast<seconds>(stop - start);
   //printf(duration.count());
-//   std::cerr << duration.count() << std::endl;
-  fprintf(stderr,"%f\n",duration.count());
+   std::cerr << duration.count() << std::endl;
+//  fprintf(stderr,"%f\n",duration.count());
   
   return 0;
 }
