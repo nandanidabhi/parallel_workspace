@@ -42,7 +42,7 @@ int main (int argc, char* argv[]) {
   float t1 = (b - a) / n;
   float sum = 0;
   for(int i = 0; i < n; i++)
-	{
+  {
     	x = a + ((i + 0.5) * t1);
     	// if(functionid == 1) f = f1(x,intensity);
     	//  else if(functionid == 2) f = f2(x,intensity);
@@ -61,13 +61,15 @@ int main (int argc, char* argv[]) {
 	    		case 4: sum += f4(x,intensity);
 	      			break;
 	      		default: return -1;
-    	}
+    		}
   }
-  std::cout << sum * t1 << std::endl;
+//   std::cout << sum * t1 << std::endl;
+  printf(stdout,"%f\n", p);
   auto stop = high_resolution_clock::now();
   auto duration = duration_cast<seconds>(stop - start);
   //printf(duration.count());
-  std::cerr << duration.count() << std::endl;
+//   std::cerr << duration.count() << std::endl;
+  printf(stderr,"%f\n",duration.count());
   
   return 0;
 }
