@@ -91,13 +91,15 @@ int main(int argc, char **argv)
   for(auto & filecontent : wordmap){
     //  threads.push_back(std::thread(fileCount, std::ref(filecontent), std::ref(dict)));
     threads.push_back(std::thread([&filecontent, &dict, &mu] {
+	  //mu.lock();			    
           for(auto & w: filecontent){
-	    mu.lock();
+	    std::lock_guard<std::mutex> lg(mu);
 	    int count = dict.get(w);
 	    ++count;
 	    dict.set(w,count);
-	    mu.unlock();
-	  }				    
+	    
+	  }
+	  // mu.unlock();
 	}));
   }
   for(auto &th : threads){
