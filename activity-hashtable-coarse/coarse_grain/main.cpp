@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <thread>
+#include <mutex>
 
 #include "Dictionary.hpp"
 #include "MyHashtable.hpp"
@@ -86,13 +87,16 @@ int main(int argc, char **argv)
   // write code here
 
   std::vector<std::thread> threads;
+  std::mutex mu;
   for(auto & filecontent : wordmap){
     //  threads.push_back(std::thread(fileCount, std::ref(filecontent), std::ref(dict)));
-    threads.push_back(std::thread([&filecontent, &dict] {
+    threads.push_back(std::thread([&filecontent, &dict, &mu] {
           for(auto & w: filecontent){
+	    mu.lock();
 	    int count = dict.get(w);
 	    ++count;
 	    dict.set(w,count);
+	    mu.unlock();
 	  }				    
 	}));
   }
