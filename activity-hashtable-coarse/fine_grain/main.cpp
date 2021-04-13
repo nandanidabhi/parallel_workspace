@@ -90,7 +90,7 @@ int main(int argc, char **argv)
   std::mutex mu;
   for(auto & filecontent : wordmap){
     //  threads.push_back(std::thread(fileCount, std::ref(filecontent), std::ref(dict)));
-    threads.push_back(std::thread([&filecontent, &dict, &mu] {
+    threads.push_back(std::thread([&filecontent, &dict] {
 	  //mu.lock();			    
           for(auto & w: filecontent){
 	    //  std::lock_guard<std::mutex> lg(mu);
