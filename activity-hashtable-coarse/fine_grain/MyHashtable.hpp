@@ -1,6 +1,7 @@
 #ifndef _MY_HASHTABLE_H
 #define _MY_HASHTABLE_H
 #include <mutex>
+#include <shared_mutex>
 #include <functional>
 #include <iostream>
 #include <vector>
@@ -114,11 +115,11 @@ public:
   virtual V get(const K& key) const {
     std::size_t index = std::hash<K>{}(key) % this->capacity;
     index = index < 0 ? index + this->capacity : index;
-    //int kth_lock = index/224;
+    int kth_lock = index/224;
     // m[kth_lock].lock();
     // mu.lock();
     // cond.wait(mu, [&]() {return (done)||
-    // std::shared_lock<std::shared_time_mutex> lock(mutex_);
+    std::shared_lock<std::shared_time_mutex> lock(m[kth_lock]);
     const Node<K,V>* node = this->table[index];
 
     while (node != nullptr) {
@@ -142,15 +143,16 @@ public:
   virtual void set(const K& key, const V& value) {
     std::size_t index = std::hash<K>{}(key) % this->capacity;
     index = index < 0 ? index + this->capacity : index;
-    int kth_lock = index/224;
-    m[kth_lock].lock(); 
-    //std::unique_lock<std::shared_time_mutex> lock(mutex_);
+    int kth_lock = index%224;
+    //m[kth_lock].lock(); 
+    std::unique_lock<std::shared_time_mutex> lock(m[kth_lock]);
+    //std::unique_lock<mutex>lck(m[kth_lock]);
     Node<K,V>* node = this->table[index];
     
     while (node != nullptr) {
       if (node->key == key) {
 	      node->value = value;
-	      m[kth_lock].unlock();
+	      //m[kth_lock].unlock();
 	      //cond.notify_one();
 	      // mu.unlock();
 	      return;
@@ -162,7 +164,7 @@ public:
     node = new Node<K,V>(key, value);
     node->next = this->table[index];
     this->table[index] = node;
-    m[kth_lock].unlock();
+    //m[kth_lock].unlock();
     //cond.notify_one();
     //mu.unlock();
     this->count++;
