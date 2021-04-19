@@ -1,0 +1,19 @@
+
+int main () {
+
+  char hostbuffer[256];
+  char *IPbuffer;
+  struct hostent *host_entry;
+  int hostname;
+  hostname = gethostname(hostbuffer, sizeof(hostbuffer));
+  checkHostName(hostname);
+
+  IPbuffer = inet_ntoa(*((struct in_addr*) host_entry->addr_list[0]));
+
+  printf("Hostname: %s\n", hostbuffer);
+  printf("Host IP: %s", IPbuffer);
+
+  return 0;
+}
+
+
