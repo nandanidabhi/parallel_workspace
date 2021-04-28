@@ -36,51 +36,22 @@ public:
   /// Once the iterations are complete, each thread will execute after
   /// on the TLS object. No two thread can execute after at the same time.
   template<typename TLS>
+
   void parfor (size_t beg, size_t end, size_t increment, size_t nbthread,
-	       size_t granularity,
-	       std::function<void(TLS&)> before,
-	       std::function<float(TLS&, int)> f,
-	       std::function<void(TLS&)> after
+	       std::function<void(TLS*)> before,
+	       std::function<void(TLS*, int)> f,
+	       std::function<void(TLS*)> after
 	       ) {
     TLS tls;
-    before(tls);    
-    float sum = 0;
-     if((end-beg)/nbthread<=granularity){
-
-      
-//      for( size_t t =beg; t<nbthread; ++t){
-//        tls = 0;
-//        for(size_t j =t; j<end;j+=nbthread){	 
-//     	  tls=f(tls,j);
-//      }
-//     	sum+=tls;
-//      }
-	     
-	for( size_t t = beg; t<end; t+=nbthread){
-		tls = 0;
-		for( size_t j = t; j<t+nbthread && j<end;++j){
-			tls=f(tls,j);
-		}
-		sum+=tls;
-	}
+    before(tls);
+    int x =0;
+    for(size_t t = 0;t<end; ++t){
+      x =t%2;
+      f(tls,x);
      }
-
-     else{
-          for(size_t t = beg;t<end; t+=granularity){
-      tls = 0;
-
-      for( size_t j = t;j<t+granularity; ++j){
-	if(j==end){
-	  break;
-	}
-      	tls=f(tls, j);
-      }
-      sum+=tls; 
-      }
-     }
-
-    after(sum);
-  }  
+    after(tls);
+  }
+  
 };
 
 #endif
