@@ -9,14 +9,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Pushes test file
-      uses: dmnemec/copy_file_to_another_repo_action@main
+    - name: Push a file to another repository
+      uses: dmnemec/copy_file_to_another_repo_action@v1.1.1
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'swagger.json'
         destination_repo: 'nandanidabhi/Project'
         destination_folder: ''
-        user_email: 'nandanidabhi2@email.com'
+        user_email: 'nandanidabhi2@gmail.com'
         user_name: 'nandanidabhi'
         commit_message: 'A custom message for the commit'
