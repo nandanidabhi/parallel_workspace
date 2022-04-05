@@ -17,5 +17,6 @@ jobs:
         destination_repo: 'nandanidabhi/Project'
         destination_folder: ''
         user_email: 'nandanidabhi2@gmail.com'
+        user_password: 'Twins@123'
         user_name: 'nandanidabhi'
         commit_message: 'A custom message for the commit'
