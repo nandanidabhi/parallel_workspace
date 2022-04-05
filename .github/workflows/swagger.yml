@@ -16,6 +16,7 @@ jobs:
         source_file: 'swagger.json'
         destination_repo: 'nandanidabhi/Project'
         destination_folder: ''
-        user_email: 'nandanidabhi2@gmail.com'
         user_name: 'nandanidabhi'
+        user_email: 'nandanidabhi2@gmail.com'
+        user_pass: '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'
         commit_message: 'A custom message for the commit'
