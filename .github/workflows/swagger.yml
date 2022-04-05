@@ -9,7 +9,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Push a file to another repository
-      uses: nandanidabhi/parallel_workspace@master
+      uses: nandanidabhi/parallel_workspace@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
