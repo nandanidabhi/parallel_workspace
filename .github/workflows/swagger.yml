@@ -18,5 +18,4 @@ jobs:
         destination_folder: ''
         user_name: 'nandanidabhi'
         user_email: 'nandanidabhi2@gmail.com'
-        user_pass: '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'
         commit_message: 'A custom message for the commit'
