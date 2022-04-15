@@ -1,0 +1,21 @@
+---
+kind: pipeline
+type: kubernetes
+name: push-the-file
+
+clone:
+  disable: true
+
+steps:
+  - name: push commit
+    pull: if-not-exists
+    image: appleboy/drone-git-push
+    settings:
+      author_email: "nandanidabhi2@gmail.com"
+      author_name: nandanidabhi
+      branch: master
+      commit: true
+      commit_message: "[skip ci] Updated licenses and gitignores "
+      remote: "https://github.com/nandanidabhi/Project.git"
+      local_ref: master
+      path:
